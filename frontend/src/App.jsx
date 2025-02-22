@@ -29,49 +29,66 @@ function App() {
   };
 
   return (
-    <div className="container">
-      <h1>Global Chat</h1>
-      {!username ? (
-        <div className="username-input">
-          <input
-            type="text"
-            placeholder="Enter your name..."
-            onChange={(e) => setUsername(e.target.value)}
-            className="input"
-          />
-          <button
-            onClick={() => setUsername(username.trim() || "Anonymous")}
-            className="button"
-          >
-            Join
-          </button>
-        </div>
-      ) : (
-        <>
-          <div className="chat-container">
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`message ${
-                  msg.user === username ? "sent" : "received"
-                }`}
-              >
-                <strong>{msg.user}:</strong> {msg.text}
-              </div>
-            ))}
+    <div className="w-full min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+        <h1 className="text-3xl font-bold text-center mb-6">Global Chat</h1>
+        {!username ? (
+          <div className="flex flex-col items-center space-y-4">
+            <input
+              type="text"
+              placeholder="Enter your full name..."
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
+              className="px-4 py-2 w-full border border-gray-300 rounded-lg"
+            />
+            <button
+              onClick={() => setUsername(username.trim() || "Anonymous")}
+              className="px-4 py-2 w-full bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              disabled={!username.trim()}
+            >
+              Join
+            </button>
           </div>
-          <input
-            type="text"
-            placeholder="Type your message..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            className="input"
-          />
-          <button onClick={sendMessage} className="button">
-            Send
-          </button>
-        </>
-      )}
+        ) : (
+          <>
+            <div className="chat-container space-y-4 max-h-72 overflow-y-auto mb-4 p-4 bg-gray-50 rounded-lg">
+              {messages.map((msg, index) => (
+                <div
+                  key={index}
+                  className={`flex items-start space-x-2 ${
+                    msg.user === username ? "justify-end" : "justify-start"
+                  }`}
+                >
+                  <div
+                    className={`${
+                      msg.user === username
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-300 text-black"
+                    } p-2 rounded-lg`}
+                  >
+                    <strong>{msg.user}:</strong> {msg.text}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center space-x-2">
+              <input
+                type="text"
+                placeholder="Type your message..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="px-4 py-2 w-full border border-gray-300 rounded-lg"
+              />
+              <button
+                onClick={sendMessage}
+                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              >
+                Send
+              </button>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
