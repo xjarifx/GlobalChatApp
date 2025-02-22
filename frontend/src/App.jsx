@@ -50,22 +50,22 @@ function App() {
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-zinc-950 text-white">
-      <div className="flex h-[90vh] w-full max-w-sm flex-col rounded-xl border border-zinc-400 bg-zinc-800 p-4">
-        <h1 className="mb-2 text-center text-2xl font-bold">Global Chat</h1>
+      <div className="flex h-[90vh] w-full max-w-sm flex-col rounded border border-zinc-400 bg-zinc-800 p-4">
+        <h1 className="mb-4 text-center text-2xl font-bold">Global Chat</h1>
 
         {!username ? (
           <div className="mt-auto mb-auto flex flex-col items-center space-y-4">
             <input
               type="text"
-              placeholder="Enter your full name..."
+              placeholder=" Username"
               value={tempUsername}
               onChange={(e) => setTempUsername(e.target.value)}
-              onKeyDown={handleEnterKey} // Listen for Enter key
-              className="w-full rounded-lg border border-zinc-400 bg-zinc-700 px-4 py-3 text-white placeholder-white"
+              onKeyDown={handleEnterKey}
+              className="w-full rounded border border-zinc-400 bg-zinc-700 p-2 text-white placeholder-white"
             />
             <button
               onClick={handleJoin}
-              className="w-full rounded-lg bg-blue-500 px-4 py-3 text-white hover:bg-blue-600"
+              className="w-full rounded bg-blue-500 p-2 text-white hover:bg-blue-600"
               disabled={tempUsername.trim().length < 2}
             >
               Join
@@ -73,39 +73,49 @@ function App() {
           </div>
         ) : (
           <>
-            <div className="h-[70vh] flex-1 space-y-2 overflow-y-auto rounded-lg bg-zinc-700 p-4">
-              {messages.map((msg, index) => (
-                <div
-                  key={index}
-                  className={`flex items-start space-x-2 ${
-                    msg.user === username ? "justify-end" : "justify-start"
-                  }`}
-                >
+            <div className="h-[70vh] flex-1 space-y-2 overflow-y-auto rounded bg-zinc-700 p-2">
+              {messages.map((msg, index) => {
+                const isUser = msg.user === username;
+                return (
                   <div
-                    className={`max-w-[75%] rounded-lg p-2 ${
-                      msg.user === username
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-300 text-black"
+                    key={index}
+                    className={`flex flex-col ${
+                      isUser ? "items-end" : "items-start"
                     }`}
                   >
-                    <strong>{msg.user}:</strong> {msg.text}
+                    <p
+                      className={`text-sm opacity-50 ${
+                        isUser ? "text-right" : "text-left"
+                      }`}
+                    >
+                      {msg.user}
+                    </p>
+                    <div
+                      className={`max-w-[75%] rounded p-2 ${
+                        isUser
+                          ? "self-end bg-blue-500 text-white"
+                          : "self-start bg-gray-300 text-black"
+                      }`}
+                    >
+                      <p>{msg.text}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
               <div ref={chatEndRef} />
             </div>
             <div className="mt-2 flex items-center space-x-2">
               <input
                 type="text"
-                placeholder="Type a message..."
+                placeholder=" Aa"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-                className="w-full rounded-lg border border-zinc-400 bg-zinc-700 px-4 py-3 text-white placeholder-white"
+                className="w-full rounded border border-zinc-400 bg-zinc-700 p-2 text-white placeholder-white"
               />
               <button
                 onClick={sendMessage}
-                className="rounded-lg bg-blue-500 px-4 py-3 text-white hover:bg-blue-600"
+                className="rounded bg-blue-500 p-2 text-white hover:bg-blue-600"
               >
                 Send
               </button>
