@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 
 function App() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([]); 
   const [input, setInput] = useState("");
   const [ws, setWs] = useState(null);
   const [username, setUsername] = useState("");
