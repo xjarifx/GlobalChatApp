@@ -18,3 +18,40 @@
   background-color: #dbeafe; /* Very light blue-100 */
   border-radius: 10px;
 }
+
+/* Add smooth scrolling for all elements */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Media query to hide scrollbar on mobile devices */
+@media (max-width: 640px) {
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+}
+
+/* Improve tap target sizes on mobile */
+@media (max-width: 640px) {
+  button {
+    min-height: 42px;
+    min-width: 42px;
+  }
+}
+
+/* Improve focus styles for accessibility */
+:focus {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+/* Remove focus outline for mouse users, keep for keyboard navigation */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Make focus visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}

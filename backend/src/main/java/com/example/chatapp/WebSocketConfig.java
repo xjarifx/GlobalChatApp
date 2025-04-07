@@ -25,7 +25,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
         container.setMaxBinaryMessageBufferSize(512 * 1024); // 512KB binary message
         
         // Increase timeouts for better stability
-        container.setAsyncSendTimeout(60000); // 60 seconds
+        // container.setAsyncSendTimeout(60000); // 60 seconds
         container.setMaxSessionIdleTimeout(120000L); // 120 seconds
         
         return container;
